@@ -69,6 +69,7 @@ namespace TechnoservisApp.Pages
             }
 
             new RequestEditingWindow(request).ShowDialog();
+            _cont.ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
             dtgRequests.ItemsSource = _cont.RepairingRequest.ToList();
         }
 
