@@ -120,6 +120,7 @@
     <Compile Include="Entities\UserType.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Statistics.cs" />
     <Compile Include="Windows\CommentsWindow.xaml.cs">
       <DependentUpon>CommentsWindow.xaml</DependentUpon>
     </Compile>

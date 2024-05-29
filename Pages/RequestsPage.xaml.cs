@@ -168,10 +168,11 @@ namespace TechnoservisApp.Pages
 
         private void btnStat_Click(object sender, RoutedEventArgs e)
         {
-            var completed = _cont.RepairingRequest.Where(r => r.StatusId == (int)StatusOfRequest.Completed).ToList();
-            var avgHours = (int)completed.Average(r => (DateTime.Now - r.StartDate.Value).TotalHours);
+            var requests = _cont.RepairingRequest.ToList();
+            var completed = Statistics.CountCompletedRequests(requests);
+            var avgHours = Statistics.GetAverageExecutionTime(requests);
 
-            MessageBox.Show($"Выполнено заявок: {completed.Count()}\nСреднее время выполнения: {avgHours}ч\n", "Статистика работы отдела обслуживания");
+            MessageBox.Show($"Выполнено заявок: {completed}\nСреднее время выполнения: {avgHours}ч\n", "Статистика работы отдела обслуживания");
         }
 
         private void btnComments_Click(object sender, RoutedEventArgs e)
