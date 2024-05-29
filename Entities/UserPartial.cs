@@ -16,4 +16,12 @@ namespace TechnoservisApp.Entities
             }
         }
     }
+
+    public enum TypeOfUser
+    {
+        Manager = 1,
+        Master,
+        Operator,
+        Client
+    }
 }

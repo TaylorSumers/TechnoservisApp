@@ -4,28 +4,33 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f5e889766a8249d4ade94a5d17b8e03b" Name="Diagram1">
-        <EntityTypeShape EntityType="TechnoservisModel.Component" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TechnoservisModel.DefectType" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="TechnoservisModel.EquipmentType" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="TechnoservisModel.Priority" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="TechnoservisModel.RepairingRequest" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="TechnoservisModel.ReparingComponent" Width="1.5" PointX="7.5" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="TechnoservisModel.Report" Width="1.5" PointX="7.5" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="TechnoservisModel.RequestStatus" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
-        <EntityTypeShape EntityType="TechnoservisModel.Role" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="TechnoservisModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TechnoservisModel.User" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
-        <AssociationConnector Association="TechnoservisModel.FK_ReparingComponent_Component" ManuallyRouted="false" />
-        <AssociationConnector Association="TechnoservisModel.FK_RepairingRequest_DefectType" ManuallyRouted="false" />
-        <AssociationConnector Association="TechnoservisModel.FK_RepairingRequest_EquipmentType" ManuallyRouted="false" />
-        <AssociationConnector Association="TechnoservisModel.FK_RepairingRequest_Priority" ManuallyRouted="false" />
-        <AssociationConnector Association="TechnoservisModel.FK_RepairingRequest_RequestStatus" ManuallyRouted="false" />
-        <AssociationConnector Association="TechnoservisModel.FK_RepairingRequest_User" ManuallyRouted="false" />
-        <AssociationConnector Association="TechnoservisModel.FK_RepairingRequest_User1" ManuallyRouted="false" />
-        <AssociationConnector Association="TechnoservisModel.FK_ReparingComponent_RepairingRequest" ManuallyRouted="false" />
-        <AssociationConnector Association="TechnoservisModel.FK_Report_RepairingRequest" ManuallyRouted="false" />
-        <AssociationConnector Association="TechnoservisModel.FK_User_Role" ManuallyRouted="false" />
+      <Diagram DiagramId="7009f7951f0446d5ae2513b087e844ab" Name="Diagram1">
+        <EntityTypeShape EntityType="TecnoservisModel.CarBrand" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TecnoservisModel.CarModel" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TecnoservisModel.CarType" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TecnoservisModel.Comment" Width="1.5" PointX="7.5" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TecnoservisModel.Component" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TecnoservisModel.Priority" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TecnoservisModel.RepairingRequest" Width="1.5" PointX="5.25" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TecnoservisModel.ReparingComponent" Width="1.5" PointX="7.5" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TecnoservisModel.Report" Width="1.5" PointX="7.5" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TecnoservisModel.RequestStatus" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="TecnoservisModel.sysdiagrams" Width="1.5" PointX="9.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TecnoservisModel.User" Width="1.5" PointX="3" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TecnoservisModel.UserType" Width="1.5" PointX="0.75" PointY="11.25" IsExpanded="true" />
+        <AssociationConnector Association="TecnoservisModel.FK_CarModel_CarBrand" ManuallyRouted="false" />
+        <AssociationConnector Association="TecnoservisModel.FK_CarModel_CarType" ManuallyRouted="false" />
+        <AssociationConnector Association="TecnoservisModel.FK_RepairingRequest_CarModel" ManuallyRouted="false" />
+        <AssociationConnector Association="TecnoservisModel.FK_Comment_RepairingRequest" ManuallyRouted="false" />
+        <AssociationConnector Association="TecnoservisModel.FK_Comment_User" ManuallyRouted="false" />
+        <AssociationConnector Association="TecnoservisModel.FK_ReparingComponent_Component" ManuallyRouted="false" />
+        <AssociationConnector Association="TecnoservisModel.FK_RepairingRequest_Priority" ManuallyRouted="false" />
+        <AssociationConnector Association="TecnoservisModel.FK_RepairingRequest_RequestStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="TecnoservisModel.FK_RepairingRequest_User" ManuallyRouted="false" />
+        <AssociationConnector Association="TecnoservisModel.FK_RepairingRequest_User1" ManuallyRouted="false" />
+        <AssociationConnector Association="TecnoservisModel.FK_ReparingComponent_RepairingRequest" ManuallyRouted="false" />
+        <AssociationConnector Association="TecnoservisModel.FK_Report_RepairingRequest" ManuallyRouted="false" />
+        <AssociationConnector Association="TecnoservisModel.FK_User_Role" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

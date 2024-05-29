@@ -17,25 +17,24 @@ namespace TechnoservisApp.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public RepairingRequest()
         {
+            this.Comment = new HashSet<Comment>();
             this.ReparingComponent = new HashSet<ReparingComponent>();
         }
     
         public int Id { get; set; }
         public System.DateTime CreationDate { get; set; }
-        public int EquipmentTypeId { get; set; }
-        public string EquipmentSerial { get; set; }
-        public int DefectTypeId { get; set; }
-        public string DefectDesc { get; set; }
-        public int PriorityId { get; set; }
-        public int RequesterId { get; set; }
-        public Nullable<int> PerformerId { get; set; }
-        public int StatusId { get; set; }
-        public Nullable<System.DateTime> CompleteDate { get; set; }
-        public string Comments { get; set; }
         public Nullable<System.DateTime> StartDate { get; set; }
+        public Nullable<System.DateTime> CompleteDate { get; set; }
+        public Nullable<int> CarModelId { get; set; }
+        public string ProblemDesc { get; set; }
+        public Nullable<int> PriorityId { get; set; }
+        public int ClientId { get; set; }
+        public Nullable<int> MasterId { get; set; }
+        public int StatusId { get; set; }
     
-        public virtual DefectType DefectType { get; set; }
-        public virtual EquipmentType EquipmentType { get; set; }
+        public virtual CarModel CarModel { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comment> Comment { get; set; }
         public virtual Priority Priority { get; set; }
         public virtual RequestStatus RequestStatus { get; set; }
         public virtual User User { get; set; }

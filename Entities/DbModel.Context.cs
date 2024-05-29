@@ -25,16 +25,18 @@ namespace TechnoservisApp.Entities
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<CarBrand> CarBrand { get; set; }
+        public virtual DbSet<CarModel> CarModel { get; set; }
+        public virtual DbSet<CarType> CarType { get; set; }
+        public virtual DbSet<Comment> Comment { get; set; }
         public virtual DbSet<Component> Component { get; set; }
-        public virtual DbSet<DefectType> DefectType { get; set; }
-        public virtual DbSet<EquipmentType> EquipmentType { get; set; }
         public virtual DbSet<Priority> Priority { get; set; }
         public virtual DbSet<RepairingRequest> RepairingRequest { get; set; }
         public virtual DbSet<ReparingComponent> ReparingComponent { get; set; }
         public virtual DbSet<Report> Report { get; set; }
         public virtual DbSet<RequestStatus> RequestStatus { get; set; }
-        public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<UserType> UserType { get; set; }
     }
 }

@@ -8,6 +8,17 @@ namespace TechnoservisApp.Entities
 {
     public partial class RepairingRequest
     {
+        public string IdStr
+        {
+            get
+            {
+                if (Id == 0)
+                    return "Не присвоен";
+                else
+                    return Id.ToString();
+            }
+        }
+
         public string StartDateStr
         {
             get
@@ -29,5 +40,12 @@ namespace TechnoservisApp.Entities
                     return CompleteDate.Value.ToString("dd.MM.yyyy HH:mm");
             }
         }
+    }
+
+    public enum StatusOfRequest
+    {
+        InProgress = 1,
+        Completed,
+        New
     }
 }

@@ -10,33 +10,43 @@
 
     <Grid Background="White">
         <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
             <RowDefinition/>
             <RowDefinition Height="0.2*"/>
         </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Поиск" Margin="5" VerticalAlignment="Center"/>
+            <TextBox Name="tbxSearch" Height="30" Width="200" TextChanged="tbxSearch_TextChanged"/>
+        </StackPanel>
         <DataGrid Margin="10" Name="dtgRequests" IsReadOnly="True" AutoGenerateColumns="False"
-                  ColumnWidth="*">
+                  ColumnWidth="*" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Номер" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Дата создания" Binding="{Binding CreationDate, StringFormat={}{0:d}}"/>
-                <DataGridTextColumn Header="Тип оборудования" Binding="{Binding EquipmentType.Name}"/>
-                <DataGridTextColumn Header="Серийный номер" Binding="{Binding EquipmentSerial}"/>
-                <DataGridTextColumn Header="Тип дефекта" Binding="{Binding DefectType.Name}"/>
+                <DataGridTextColumn Header="Тип авто" Binding="{Binding CarModel.CarType.Name}"/>
+                <DataGridTextColumn Header="Марка авто" Binding="{Binding CarModel.CarBrand.Name}"/>
+                <DataGridTextColumn Header="Модель авто" Binding="{Binding CarModel.Name}"/>
                 <DataGridTextColumn Header="Приоритетность" Binding="{Binding Priority.Name}"/>
                 <DataGridTextColumn Header="Статус" Binding="{Binding RequestStatus.Name}"/>
                 <DataGridTextColumn Header="Начата" Binding="{Binding StartDateStr}"/>
                 <DataGridTextColumn Header="Завершена" Binding="{Binding CompleteDateStr}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right" Name="spManager">
-            <Button Content="Создать" Name="btnCreate" Click="btnCreate_Click"/>
-            <Button Content="Редактировать" Name="btnEdit" Click="btnEdit_Click"/>
-            <Button Content="Показать отчет" Name="tbnReports" Click="tbnReports_Click"/>
-            <Button Content="Статистика" Name="btnStat" Click="btnStat_Click"/>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Left" Name="spRepairer">
-            <Button Content="Начать ремонт" Name="btnStartRepairing" Click="btnStartRepairing_Click"/>
-            <Button Content="Завершить ремонт" Name="btnFinishRepairing" Click="btnFinishRepairing_Click"/>
-            <Button Content="Добавить запчасти" Name="btnAddEquipment" Click="btnAddEquipment_Click"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="2">
+            <StackPanel Orientation="Horizontal" Name="spClientOperator" Visibility="Collapsed">
+                <Button Content="Создать" Name="btnCreate" Click="btnCreate_Click"/>
+                <Button Content="Редактировать" Name="btnEdit" Click="btnEdit_Click"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Name="spManager" Visibility="Collapsed">
+                <Button Content="Показать отчет" Name="tbnReports" Click="tbnReports_Click"/>
+                <Button Content="Статистика" Name="btnStat" Click="btnStat_Click"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Name="spMaster" Visibility="Collapsed">
+                <Button Content="Начать ремонт" Name="btnStartRepairing" Click="btnStartRepairing_Click"/>
+                <Button Content="Завершить ремонт" Name="btnFinishRepairing" Click="btnFinishRepairing_Click"/>
+                <Button Content="Добавить запчасти" Name="btnAddEquipment" Click="btnAddEquipment_Click"/>
+                <Button Content="Комментарии" Name="btnComments" Click="btnComments_Click"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Page>

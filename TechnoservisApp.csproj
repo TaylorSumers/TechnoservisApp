@@ -64,24 +64,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Entities\ReparingRequestPartial.cs" />
-    <Compile Include="Entities\UserPartial.cs" />
-    <Compile Include="Windows\EquipmentWindow.xaml.cs">
-      <DependentUpon>EquipmentWindow.xaml</DependentUpon>
+    <Compile Include="Entities\CarBrand.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Windows\ReportWindow.xaml.cs">
-      <DependentUpon>ReportWindow.xaml</DependentUpon>
+    <Compile Include="Entities\CarModel.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Windows\RequestEditingWindow.xaml.cs">
-      <DependentUpon>RequestEditingWindow.xaml</DependentUpon>
+    <Compile Include="Entities\CarType.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
+    <Compile Include="Entities\Comment.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\Component.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
@@ -101,12 +94,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DbModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Entities\DefectType.cs">
-      <DependentUpon>DbModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\EquipmentType.cs">
-      <DependentUpon>DbModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Entities\Priority.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
@@ -116,22 +103,44 @@
     <Compile Include="Entities\ReparingComponent.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\ReparingRequestPartial.cs" />
     <Compile Include="Entities\Report.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\RequestStatus.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entities\Role.cs">
-      <DependentUpon>DbModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Entities\sysdiagrams.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entities\TechnoservisEntitiesPartial.cs" />
     <Compile Include="Entities\User.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\UserPartial.cs" />
+    <Compile Include="Entities\UserType.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\CommentsWindow.xaml.cs">
+      <DependentUpon>CommentsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\EquipmentWindow.xaml.cs">
+      <DependentUpon>EquipmentWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ReportWindow.xaml.cs">
+      <DependentUpon>ReportWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\RequestEditingWindow.xaml.cs">
+      <DependentUpon>RequestEditingWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entities\TechnoservisEntitiesPartial.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -141,6 +150,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\RequestsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\CommentsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -198,10 +211,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Entities\DbModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DbModel.Context.cs</LastGenOutput>
       <DependentUpon>DbModel.edmx</DependentUpon>
+      <LastGenOutput>DbModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Entities\DbModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -209,9 +225,5 @@
       <LastGenOutput>DbModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

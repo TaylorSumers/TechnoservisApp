@@ -29,7 +29,7 @@ namespace TechnoservisApp.Windows
         {
             InitializeComponent();
             DataContext = _request = request;
-            FillCbx();
+            Fill();
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -52,12 +52,30 @@ namespace TechnoservisApp.Windows
             }
         }
 
-        private void FillCbx()
+        private void Fill()
         {
-            cbxDefectType.ItemsSource = _cont.DefectType.ToList();
-            cbxEquipmentType.ItemsSource = _cont.EquipmentType.ToList();
-            cbxRequester.ItemsSource = cbxPerformer.ItemsSource = _cont.User.ToList();
+            cbxCarBrand.ItemsSource = _cont.CarBrand.ToList();
+            cbxMaster.ItemsSource = _cont.User.Where(u => u.TypeId == 2).ToList();
+            cbxClient.ItemsSource = _cont.User.Where(u => u.TypeId == 4).ToList();
             cbxPriority.ItemsSource = _cont.Priority.ToList();
+
+            if(MainWindow.currentUser.TypeId == (int)TypeOfUser.Client)
+            {
+                _request.ClientId = MainWindow.currentUser.Id;
+                cbxPriority.IsEnabled = cbxMaster.IsEnabled = cbxClient.IsEnabled = false;
+            }
+
+            if (_request.CarModel != null)
+            {
+                cbxCarBrand.ItemsSource = _cont.CarBrand.ToList();
+                cbxCarBrand.SelectedValue = _request.CarModel.BrandId;
+            }
+        }
+
+        private void cbxCarBrand_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbxCarBrand.SelectedValue != null)
+                cbxCarModel.ItemsSource = _cont.CarModel.Where(m => m.BrandId == (int)cbxCarBrand.SelectedValue).ToList();
         }
     }
 }

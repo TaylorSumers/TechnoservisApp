@@ -12,13 +12,14 @@ namespace TechnoservisApp.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class Report
+    public partial class Comment
     {
         public int Id { get; set; }
-        public int HoursSpent { get; set; }
-        public decimal Cost { get; set; }
-        public string RepairingDesc { get; set; }
+        public string Message { get; set; }
+        public int MasterId { get; set; }
+        public int RequestId { get; set; }
     
         public virtual RepairingRequest RepairingRequest { get; set; }
+        public virtual User User { get; set; }
     }
 }

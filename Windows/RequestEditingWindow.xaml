@@ -24,50 +24,42 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition/>
         </Grid.RowDefinitions>
 
         <TextBlock Text="Номер"/>
         <TextBlock Text="Дата создания" Grid.Row="1"/>
-        <TextBlock Text="Тип оборудования" Grid.Row="2"/>
-        <TextBlock Text="Серийный номер" Grid.Row="3"/>
-        <TextBlock Text="Тип дефекта" Grid.Row="4"/>
-        <TextBlock Text="Описание дефекта" Grid.Row="5"/>
-        <TextBlock Text="Приоритет" Grid.Row="6"/>
-        <TextBlock Text="Закзчик" Grid.Row="7"/>
-        <TextBlock Text="Исполнитель" Grid.Row="8"/>
-        <TextBlock Text="Статус" Grid.Row="9"/>
-        <TextBlock Text="Дата начала" Grid.Row="10"/>
-        <TextBlock Text="Дата выполнения" Grid.Row="11"/>
-        <TextBlock Text="Комментарии" Grid.Row="12"/>
+        <TextBlock Text="Марка" Grid.Row="2"/>
+        <TextBlock Text="Модель" Grid.Row="3"/>
+        <TextBlock Text="Описание дефекта" Grid.Row="4"/>
+        <TextBlock Text="Приоритет" Grid.Row="5"/>
+        <TextBlock Text="Закзчик" Grid.Row="6"/>
+        <TextBlock Text="Исполнитель" Grid.Row="7"/>
+        <TextBlock Text="Статус" Grid.Row="8"/>
+        <TextBlock Text="Дата начала" Grid.Row="9"/>
+        <TextBlock Text="Дата выполнения" Grid.Row="10"/>
 
-        <TextBlock Grid.Column="1" Grid.Row="0" Margin="2" Text="{Binding Id}"/>
+        <TextBlock Grid.Column="1" Margin="2" Text="{Binding IdStr}"/>
         <TextBlock Grid.Column="1" Grid.Row="1" Margin="2" Text="{Binding CreationDate, StringFormat={}{0:dd.MM.yyyy HH:mm}}"/>
-        <ComboBox Grid.Column="1" Grid.Row="2" Margin="2" Name="cbxEquipmentType"
-                  SelectedValue="{Binding EquipmentTypeId}" SelectedValuePath="Id"
+        <ComboBox Grid.Column="1" Grid.Row="2" Margin="2" Name="cbxCarBrand" SelectedValuePath="Id"
+                  DisplayMemberPath="Name" SelectionChanged="cbxCarBrand_SelectionChanged"/>
+        <ComboBox Grid.Column="1" Grid.Row="3" Margin="2" Name="cbxCarModel"
+                  SelectedValue="{Binding CarModelId}" SelectedValuePath="Id"
                   DisplayMemberPath="Name"/>
-        <TextBox Grid.Column="1" Grid.Row="3" Margin="2" Text="{Binding EquipmentSerial}"/>
-        <ComboBox Grid.Column="1" Grid.Row="4" Margin="2" Name="cbxDefectType"
-                  SelectedValue="{Binding DefectTypeId}" SelectedValuePath="Id"
-                  DisplayMemberPath="Name"/>
-        <TextBox Grid.Column="1" Grid.Row="5" Margin="2" Text="{Binding DefectDesc}"/>
-        <ComboBox Grid.Column="1" Grid.Row="6" Margin="2" Name="cbxPriority"
+        <TextBox Grid.Column="1" Grid.Row="4" Margin="2" Text="{Binding ProblemDesc}"/>
+        <ComboBox Grid.Column="1" Grid.Row="5" Margin="2" Name="cbxPriority"
                   SelectedValue="{Binding PriorityId}" SelectedValuePath="Id"
                   DisplayMemberPath="Name"/>
-        <ComboBox Grid.Column="1" Grid.Row="7" Margin="2" Name="cbxRequester"
-                  SelectedValue="{Binding RequesterId}" SelectedValuePath="Id"
+        <ComboBox Grid.Column="1" Grid.Row="6" Margin="2" Name="cbxClient"
+                  SelectedValue="{Binding ClientId}" SelectedValuePath="Id"
                   DisplayMemberPath="FullName"/>
-        <ComboBox Grid.Column="1" Grid.Row="8" Margin="2"  Name="cbxPerformer"
-                  SelectedValue="{Binding PerformerId}" SelectedValuePath="Id"
+        <ComboBox Grid.Column="1" Grid.Row="7" Margin="2"  Name="cbxMaster"
+                  SelectedValue="{Binding MasterId}" SelectedValuePath="Id"
                   DisplayMemberPath="FullName"/>
-        <TextBlock Grid.Column="1" Grid.Row="9" Margin="2" Text="{Binding RequestStatus.Name}"/>
-        <TextBlock Grid.Column="1" Grid.Row="10" Margin="2" Text="{Binding StartDateStr}"/>
-        <TextBlock Grid.Column="1" Grid.Row="11" Margin="2" Text="{Binding CompleteDateStr}"/>
-        <TextBox Grid.Column="1" Grid.Row="12" Margin="2" Text="{Binding Comments}"
-                 TextWrapping="Wrap"/>
+        <TextBlock Grid.Column="1" Grid.Row="8" Margin="2" Text="{Binding RequestStatus.Name}"/>
+        <TextBlock Grid.Column="1" Grid.Row="9" Margin="2" Text="{Binding StartDateStr}"/>
+        <TextBlock Grid.Column="1" Grid.Row="10" Margin="2" Text="{Binding CompleteDateStr}"/>
 
-        <Button Content="Сохранить" Grid.Column="1" Grid.Row="13" Margin="0" 
+        <Button Content="Сохранить" Grid.Column="1" Grid.Row="11" Margin="0" 
                 Name="btnSave" Click="btnSave_Click"/>
     </Grid>
 </Window>

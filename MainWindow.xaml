@@ -16,7 +16,7 @@
             <TextBlock Text="Техносервис" VerticalAlignment="Center" FontSize="40" Margin="10"/>
         </StackPanel>
         <StackPanel Name="spUserInfo" HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal">
-            <TextBlock Text="{Binding Role.Name}" Margin="5"/>
+            <TextBlock Text="{Binding UserType.Name}" Margin="5"/>
             <TextBlock Text="{Binding Surname}" Margin="5"/>
             <TextBlock Text="{Binding Name}" Margin="5"/>
             <TextBlock Text="{Binding Patronymic}" Margin="5"/>

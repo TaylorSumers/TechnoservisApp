@@ -12,18 +12,22 @@ namespace TechnoservisApp.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class Role
+    public partial class CarModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Role()
+        public CarModel()
         {
-            this.User = new HashSet<User>();
+            this.RepairingRequest = new HashSet<RepairingRequest>();
         }
     
         public int Id { get; set; }
+        public int BrandId { get; set; }
         public string Name { get; set; }
+        public int TypeId { get; set; }
     
+        public virtual CarBrand CarBrand { get; set; }
+        public virtual CarType CarType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> User { get; set; }
+        public virtual ICollection<RepairingRequest> RepairingRequest { get; set; }
     }
 }

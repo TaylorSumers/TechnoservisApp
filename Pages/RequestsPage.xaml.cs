@@ -30,33 +30,61 @@ namespace TechnoservisApp.Pages
         public RequestsPage()
         {
             InitializeComponent();
+            ShowControls();
+            UpdateDataGrid();
+        }
 
-            if(MainWindow.currentUser.RoleId == 2) // Repairer
+        private void ShowControls()
+        {
+            switch (MainWindow.currentUser.TypeId)
             {
-                spRepairer.Visibility = Visibility.Visible;
-                spManager.Visibility = Visibility.Hidden;
-                dtgRequests.ItemsSource = _cont.RepairingRequest.Where(req => req.PerformerId == MainWindow.currentUser.Id && req.StatusId != 3).ToList();
-            }
-            else // Manager
-            {
-                spRepairer.Visibility = Visibility.Hidden;
-                spManager.Visibility = Visibility.Visible;
-                dtgRequests.ItemsSource = _cont.RepairingRequest.ToList();
+                case (int)TypeOfUser.Manager:
+                    spManager.Visibility = Visibility.Visible;
+                    break;
+                case (int)TypeOfUser.Master:
+                    spMaster.Visibility = Visibility.Visible;
+                    break;
+                case (int)TypeOfUser.Operator:
+                    spClientOperator.Visibility = Visibility.Visible;
+                    break;
+                case (int)TypeOfUser.Client:
+                    spClientOperator.Visibility = Visibility.Visible;
+                    break;
             }
         }
 
-
+        private void UpdateDataGrid(string searchText=null)
+        {
+            var requests = _cont.RepairingRequest.ToList();
+            if (!string.IsNullOrEmpty(searchText))
+                requests = requests.Where(r => searchText.Contains(r.Id.ToString())).ToList();
+            switch (MainWindow.currentUser.TypeId)
+            {
+                case (int)TypeOfUser.Manager:
+                    dtgRequests.ItemsSource = requests.ToList();
+                    break;
+                case (int)TypeOfUser.Master:
+                    dtgRequests.ItemsSource = requests.Where(r => r.MasterId == MainWindow.currentUser.Id).ToList();
+                    break;
+                case (int)TypeOfUser.Operator:
+                    dtgRequests.ItemsSource = requests.ToList();
+                    break;
+                case (int)TypeOfUser.Client: 
+                    dtgRequests.ItemsSource = requests.Where(r => r.ClientId == MainWindow.currentUser.Id).ToList();
+                    break;
+            }
+        }
 
         private void btnCreate_Click(object sender, RoutedEventArgs e)
         {
             var request = new RepairingRequest()
             {
                 CreationDate = DateTime.Now,
-                RequestStatus = _cont.RequestStatus.First(s => s.Id == 1)
+                RequestStatus = _cont.RequestStatus.Single(s => s.Id == (int)StatusOfRequest.New)
             };
 
             new RequestEditingWindow(request).ShowDialog();
-            dtgRequests.ItemsSource = _cont.RepairingRequest.ToList();
+            UpdateDataGrid();
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
@@ -70,10 +98,8 @@ namespace TechnoservisApp.Pages
 
             new RequestEditingWindow(request).ShowDialog();
             _cont.ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
-            dtgRequests.ItemsSource = _cont.RepairingRequest.ToList();
+            UpdateDataGrid();
         }
-
-
 
         private void btnStartRepairing_Click(object sender, RoutedEventArgs e)
         {
@@ -84,11 +110,11 @@ namespace TechnoservisApp.Pages
                 return;
             }
 
-            request.StatusId = 2;
+            request.StatusId = (int)StatusOfRequest.InProgress;
             request.StartDate = DateTime.Now;
             _cont.SaveChanges();
-            MessageBox.Show("Заявка получила статус \"в работе\"");
-            dtgRequests.ItemsSource = _cont.RepairingRequest.Where(req => req.PerformerId == MainWindow.currentUser.Id && req.StatusId != 3).ToList();
+            MessageBox.Show("Заявка получила статус \"В процессе ремонта\"");
+            UpdateDataGrid();
         }
 
         private void btnFinishRepairing_Click(object sender, RoutedEventArgs e)
@@ -107,7 +133,7 @@ namespace TechnoservisApp.Pages
             }
 
             new ReportWindow(request).ShowDialog();
-            dtgRequests.ItemsSource = _cont.RepairingRequest.Where(req => req.PerformerId == MainWindow.currentUser.Id && req.StatusId != 3).ToList();
+            UpdateDataGrid();
         }
 
         private void btnAddEquipment_Click(object sender, RoutedEventArgs e)
@@ -142,18 +168,27 @@ namespace TechnoservisApp.Pages
 
         private void btnStat_Click(object sender, RoutedEventArgs e)
         {
-            var completed = _cont.RepairingRequest.Where(r => r.StatusId == 3);
-            var avgHours = completed.Where(r => r.Report != null).Average(r => r.Report.HoursSpent);
-            var sb = new StringBuilder($"Выполнено заявок: {completed.Count()}\nСреднее время выполнения: {avgHours}ч\n");
-            foreach(var type in _cont.DefectType)
+            var completed = _cont.RepairingRequest.Where(r => r.StatusId == (int)StatusOfRequest.Completed).ToList();
+            var avgHours = (int)completed.Average(r => (DateTime.Now - r.StartDate.Value).TotalHours);
+
+            MessageBox.Show($"Выполнено заявок: {completed.Count()}\nСреднее время выполнения: {avgHours}ч\n", "Статистика работы отдела обслуживания");
+        }
+
+        private void btnComments_Click(object sender, RoutedEventArgs e)
+        {
+            var request = dtgRequests.SelectedItem as RepairingRequest;
+            if (request == null)
             {
-                int amount = 0;
-                if(type.RepairingRequest != null)
-                    amount = type.RepairingRequest.Count(r => r.StatusId == 3);
-                sb.AppendLine($"{type.Name} - {amount}");
+                MessageBox.Show("Выберите заявку");
+                return;
             }
 
-            MessageBox.Show(sb.ToString(), "Статистика работы отдела обслуживания");
+            new CommentsWindow(request).ShowDialog();
+        }
+
+        private void tbxSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateDataGrid(tbxSearch.Text);
         }
     }
 }

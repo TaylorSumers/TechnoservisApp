@@ -58,7 +58,7 @@ namespace TechnoservisApp.Windows
                 MessageBox.Show("Заявка завершена");
                 
                 _request.CompleteDate = DateTime.Now;
-                _request.StatusId = 3;
+                _request.StatusId = 2;
                 _cont.SaveChanges();
                 Close();
             }
